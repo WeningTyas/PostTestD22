@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class TestAPI {
 
@@ -24,7 +25,7 @@ public class TestAPI {
     String moviePopular = baseURL + "/popular";
     String addRating = baseURL + "/" + movie_id + "/rating";
 
-
+    // ====================== Now Playing ========================== //
     @Test
     public void testMovieNowPlaying() {
         RestAssured.baseURI = baseURL;
@@ -40,7 +41,17 @@ public class TestAPI {
         String page = jsonPathEvaluator.getString("page");
         System.out.println(page);
     }
+    @Test
+    public void testIdPlaying() {
+        given()
+                .header("Authorization", myToken)
+                .get(movieNowPlaying)
+                .then()
+                .statusCode(200)
+                .body("results.id[1]",  equalTo(667538));
+    }
 
+    // ====================== Movie Popular ========================== //
     @Test
     public void testMoviePopular() {
         RestAssured.baseURI = baseURL;
@@ -56,7 +67,17 @@ public class TestAPI {
         String page = jsonPathEvaluator.getString("page");
         System.out.println(page);
     }
+    @Test
+    public void testIdPopular() {
+        given()
+                .header("Authorization", myToken)
+                .get(moviePopular)
+                .then()
+                .statusCode(200)
+                .body("results.id[2]",  equalTo(667538));
+    }
 
+    // ====================== Add Rating ========================== //
     @Test
     public void testAddRating() {
         JSONObject request = new JSONObject();
@@ -74,6 +95,13 @@ public class TestAPI {
                 .statusCode(201)
                 .log().body();
     }
+//    @Test
+//    public void testStatusCode() {
+//        Response response = RestAssured.get(addRating);
+//        System.out.println(response.getStatusCode());
+//        int actual = response.getStatusCode();
+//        Assert.assertEquals(actual, 12);
+//    }
 
 }
 
