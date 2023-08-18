@@ -95,13 +95,21 @@ public class TestAPI {
                 .statusCode(201)
                 .log().body();
     }
-//    @Test
-//    public void testStatusCode() {
-//        Response response = RestAssured.get(addRating);
-//        System.out.println(response.getStatusCode());
-//        int actual = response.getStatusCode();
-//        Assert.assertEquals(actual, 12);
-//    }
+    @Test
+    public void testStatusCode() {
+        JSONObject request = new JSONObject();
+        request.put("value", 4.50);
+        given()
+                .header("Authorization", myToken)
+                .header("Content-Type", "application/json")
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(request.toJSONString())
+                .post(addRating)
+                .then()
+                .statusCode(201)
+                .body("status_code",  equalTo(12));
+    }
 
 }
 
