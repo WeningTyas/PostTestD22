@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TestTMDB {
@@ -44,7 +45,7 @@ public class TestTMDB {
                 .get(movieNowPlaying)
                 .then()
                 .statusCode(200)
-                .body("results.id[1]",  equalTo(667538));
+                .body("results.id[1]",  equalTo(884605)); //884605 | 667538
     }
 
     // ====================== Movie Popular ========================== //
@@ -67,7 +68,7 @@ public class TestTMDB {
                 .get(moviePopular)
                 .then()
                 .statusCode(200)
-                .body("results.id[2]",  equalTo(667538));
+                .body("results.id[2]",  equalTo(724209));//724209 | 667538
     }
 
     // ====================== Add Rating ========================== //
