@@ -44,7 +44,7 @@ public class TestTMDB {
                 .get(movieNowPlaying)
                 .then()
                 .statusCode(200)
-                .body("results.id[1]",  equalTo(667538));
+                .body("results.id[1]",  equalTo(884605));
     }
 
     // ====================== Movie Popular ========================== //
@@ -67,7 +67,7 @@ public class TestTMDB {
                 .get(moviePopular)
                 .then()
                 .statusCode(200)
-                .body("results.id[2]",  equalTo(667538));
+                .body("results.id[2]",  equalTo(724209));
     }
 
     // ====================== Add Rating ========================== //
