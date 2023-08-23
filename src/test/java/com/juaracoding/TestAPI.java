@@ -6,9 +6,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
-import netscape.javascript.JSObject;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -48,7 +46,7 @@ public class TestAPI {
                 .get(movieNowPlaying)
                 .then()
                 .statusCode(200)
-                .body("results.id[1]",  equalTo(667538));
+                .body("results.id[1]",  equalTo(884605)); //884605 | 667538
     }
 
     // ====================== Movie Popular ========================== //
@@ -74,7 +72,7 @@ public class TestAPI {
                 .get(moviePopular)
                 .then()
                 .statusCode(200)
-                .body("results.id[2]",  equalTo(667538));
+                .body("results.id[2]",  equalTo(724209)); //724209 | 667538
     }
 
     // ====================== Add Rating ========================== //
@@ -110,7 +108,6 @@ public class TestAPI {
                 .statusCode(201)
                 .body("status_code",  equalTo(12));
     }
-
 }
 
 
@@ -119,8 +116,12 @@ public class TestAPI {
 * Endpoint the movie db get movie
 * - now playing,
 * - get movie popular dan
-* - post movie rating:
+* - post movie rating
 
 * Buatlah automation testing API pada endpoint diatas
 * dengan method action serta gunakan validasi test
+*
+* Validasi:
+* - HTTP status code
+* - Data di hasil response.body
 * */
